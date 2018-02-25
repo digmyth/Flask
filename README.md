@@ -146,7 +146,8 @@ if __name__ == '__main__':
 request封装请求相关数据
 
 ```
-print(request.query_string)  #  get
+print(request.args)  # get,类似字典形式
+print(request.query_string)  #  get，为字符串
 print(request.form) # post 
 print(request.values)  # get and post
 print(request.method)  # 请求方法
@@ -182,3 +183,42 @@ print(request.method)  # 请求方法
         # response.headers['X-Something'] = 'A value'
         # return response
 ```
+
+
+s117
+app.secret_key  = 'sss'
+session['user_info'] = user
+
+if session.get('user_info'): pass
+
+s118
+内容：
+1 路由系统
+2 视图函数
+3 请求和响应 request.GET.urlencode()
+4 模板语言
+5 session
+6 blueprint
+7 闪现， 依赖session
+8 扩展，类似中间件的东西
+9 数据库连接池
+
+
+内容回顾：
+实例化Falsk对象：__name__ 静态文件路径static_folder='static'，静态文件前缀static_url_path，模板路径template_forder
+路由关系： 2种方式，
+request
+    request.args
+    request.form
+    request.values
+    
+response
+    render_template()
+    redirect()
+    ''
+    
+    v=make_response('back_value')
+    ? cookie/响应关，make_response()来加工对set_cookie的实现
+    
+    session remember add  app.secrect_key 回顾完
+    
