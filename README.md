@@ -110,11 +110,44 @@ def route(self, rule, **options):
 
 动手写一个flask实现登录来带入falsk基本知识的学习
 
+app.py
+```
+from flask import Flask,render_template,request
+
+app = Flask(__name__)
+
+@app.route('/login',methods=['GET','POST'])
+def login():
+    if request.method == 'GET':
+        return render_template('login.html')
+    else:
+        user = request.form.get("user")
+        pwd = request.form.get("pwd")
+        if user == 'wxq'  and pwd=='123':
+            return 'welcomte to sites'
+        return render_template('login.html',msg="用户名或密码错误")
+
+if __name__ == '__main__':
+    app.run()
 ```
 
+当前目录下templates/login.html
+```
+<h1>登录</h1>
+<form method="post">
+    <p><input type="text" name="user"></p>
+    <p><input type="text" name="pwd"></p>
+    <input type="submit" value="提交">{{ msg }}
+</form>
 ```
 
-```
+简单系统登录就实现了，那么
 
+
+```
+print(request.query_string)  #  get
+print(request.form) # post 
+print(request.values)  # get and post
+print(request.method)  # 请求方法
 ```
 
