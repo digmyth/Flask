@@ -62,4 +62,59 @@ if __name__ == '__main__':
     run_simple('localhost', 4001, hello)  # hello如果是类，将执行call()方法
 ```
 
+## @app.route()原理
+
+明显是装饰器用法，那么就有必要复习下装饰器了
+
+无参装饰器
+```
+def wrapper(func):
+    def inner(*args,**kwargs):
+        return func(*args,**kwargs) + 'code'
+    return inner
+
+@wrapper
+def func(arg):
+    return arg
+```
+
+有参数的装饰器
+```
+def outer(arg):
+    def wrapper(func):
+        def inner(*args,**kwargs):
+            return func(*args,**kwargs) + arg
+        return inner
+    return wrapper
+
+@outer('666')  # @wrapper
+def func(arg):
+    return arg
+
+x=func('123')
+print(x)
+```
+
+@app.route('/index')就是有参数装饰器的用法
+
+```
+def route(self, rule, **options):
+    def decorator(f):
+        endpoint = options.pop('endpoint', None)
+        self.add_url_rule(rule, endpoint, f, **options)
+        return f
+    return decorator
+```
+
+## flask实现登录
+
+动手写一个flask实现登录来带入falsk基本知识的学习
+
+```
+
+```
+
+```
+
+```
 
