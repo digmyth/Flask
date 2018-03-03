@@ -10,7 +10,7 @@ Flask分为几大版块学习
 * Flask 上下文管理
 * Flask DBUtils连接池
 * Flask Session会话
-× Flask Signal信号
+* Flask Signal信号
 * Flask 特殊的装饰器
 * Flask WTForm插件
 * Flask SQLAlchemy
