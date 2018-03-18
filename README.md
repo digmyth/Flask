@@ -63,7 +63,7 @@ def __call__(self, environ, start_response):
 
 Web Server gateway interface: web服务网关接口或协议，socket实现的一种封装,用于监听用户请求。
 
-符合wsgi标准的HTTP处理协议其中一个模块wekzeug,flask依赖实现了wsgi的模块werkzeug
+符合wsgi标准的HTTP处理协议其中一个模块wekzeug,flask依赖实现了wsgi的模块werkzeug,本质就是创建socket监听请求和转发请求。
 
 用`werkzeug`模块实现一个监听并返回结果
 ```
