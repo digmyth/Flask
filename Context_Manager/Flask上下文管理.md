@@ -85,4 +85,4 @@ print(_local.__storage__)
 print(_local.__ident_func__())
 print(_local.__storage__[_local.__ident_func__()])
 ```
-其中构造函数用了`object.__setattr__(self, '__ident_func__', get_ident)`,其实就是`self.__ident_func__=get_ident`,但为什么不这样写呢，因为下面__setattr__()方法里调用了self.__ident_func__()，会形成死循环。
+其中构造函数用了object.__setattr__(self, '__ident_func__', get_ident),其实就是self.__ident_func__=get_ident,但为什么不这样写呢，因为下面__setattr__()方法里调用了self.__ident_func__()，会形成死循环。
