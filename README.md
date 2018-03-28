@@ -1,4 +1,4 @@
-# Flask框架学习
+# Flask框架入门到源码
 
 ## 一、前言
 
@@ -19,6 +19,7 @@ Flask分为几大版块学习
 
 参考博客：  http://www.cnblogs.com/wupeiqi/articles/7552008.html
 
+### 快速上手
 ```
 pip3 install flask
 ```
@@ -42,7 +43,63 @@ def index():
 if __name__ == '__main__':
     app.run() #app.__call__()
 ```
-## Flask 框架学习
+
+##＃ 反向生成URL
+
+flask也可以反向生成URL，利用url_for,用法如下
+```
+from flask import Flask,url_for
+
+app = Flask(__name__)
+
+@app.route('/index',methods=['GET','POST'],endpoint='n1')
+def index():
+    x=url_for('n1')
+    print(x)
+    return 'test pagess ...'
+
+if __name__ == '__main__':
+    app.run()
+```
+
+###  URL传参
+
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/index/<int:nid>')
+def index(nid):
+    print(nid)
+    return '%s' % nid
+
+if __name__ == '__main__':
+    app.run()
+```
+可以看出指定了数据类型int整型，默认也是整型，但有时整型，有时浮点型，有时字符串，怎么弄，注意flask里面不支持正则表达式
+
+？？问题，有办法？？
+
+在这种URL有可变参数的情况下要反向生成URL，反向生成URL如何传参，方法如下：
+
+```
+from flask import Flask,url_for
+
+app = Flask(__name__)
+
+@app.route('/index/<int:nid>',endpoint='n1')
+def index(nid):
+    x=url_for('n1',nid=888)
+    print(x)
+    return '%s' % nid
+
+if __name__ == '__main__':
+    app.run()
+```
+
+
+## Flask 框架架构
 
 路由匹配还可以改为如下，原码就是这么实现的
 ```
@@ -124,23 +181,7 @@ def route(self, rule, **options):
 
 那么flask路由规则就可以改写成app.add_url_rule('/index','n1',index)
 
-## 反向生成URL
 
-flask也可以反向生成URL，利用url_for,用法如下
-```
-from flask import Flask,url_for
-
-app = Flask(__name__)
-
-@app.route('/index',methods=['GET','POST'],endpoint='n1')
-def index():
-    x=url_for('n1')
-    print(x)
-    return 'test pagess ...'
-
-if __name__ == '__main__':
-    app.run()
-```
 
 
 ## flask实现登录
