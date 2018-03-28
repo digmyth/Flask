@@ -111,7 +111,7 @@ x=func('123')
 print(x)
 ```
 
-@app.route('/index')就是有参数装饰器的用法
+@app.route('/index')就是有参数装饰器的用法,其中endpoint是用于反向生成URL的别名
 
 ```
 def route(self, rule, **options):
@@ -123,6 +123,24 @@ def route(self, rule, **options):
 ```
 
 那么flask路由规则就可以改写成app.add_url_rule('/index','n1',index)
+
+## 反向生成URL
+
+flask也可以反向生成URL，利用url_for,用法如下
+```
+from flask import Flask,url_for
+
+app = Flask(__name__)
+
+@app.route('/index',methods=['GET','POST'],endpoint='n1')
+def index():
+    x=url_for('n1')
+    print(x)
+    return 'test pagess ...'
+
+if __name__ == '__main__':
+    app.run()
+```
 
 
 ## flask实现登录
