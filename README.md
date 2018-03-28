@@ -203,6 +203,24 @@ if __name__ == '__main__':
     app.run()
 ```
 
+redirect_to重定向URL
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/old',methods=['GET','POST'],redirect_to='new')
+def old():
+    return 'old'
+
+@app.route('/new',methods=['GET','POST'])
+def new():
+    return 'new'
+
+if __name__ == '__main__':
+    app.run()
+```
+
 @app.router(*args,**kwargs)更多可传参数
 ```
 endpoint=None,              名称，用于反向生成URL，即： url_for('名称')
