@@ -44,7 +44,7 @@ if __name__ == '__main__':
     app.run() #app.__call__()
 ```
 
-##＃ 反向生成URL
+### 反向生成URL
 
 flask也可以反向生成URL，利用url_for,用法如下
 ```
@@ -180,6 +180,25 @@ def route(self, rule, **options):
 ```
 
 那么flask路由规则就可以改写成app.add_url_rule('/index','n1',index)
+
+
+即然app.router(*args,**kwargs) 可以传参，那么都可以传哪些参数呢？
+
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/index/<int:nid>',defaults={'cid':100})
+def index(nid,cid):
+    print(nid,cid)
+    print(type(nid))
+    return str(nid+cid)
+
+if __name__ == '__main__':
+    app.run()
+```
+
 
 
 
