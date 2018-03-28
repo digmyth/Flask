@@ -221,6 +221,34 @@ if __name__ == '__main__':
     app.run()
 ```
 
+subdomain用于配置多域名，不过在测试时有请求超时出不来，感觉不是那么好用
+```
+from flask import Flask
+
+app = Flask(__name__)
+app.url_map.default_subdomain = 'admin'
+app.url_map.default_subdomain = 'www'
+app.config['SERVER_NAME'] = 'wxq.com:5000'
+
+@app.route('/index',subdomain='admin')
+def admin_index():
+    print('admin')
+    return 'admin index'
+
+@app.route('/index',subdomain='www')
+def www_index():
+    print('www')
+    return 'www index'
+
+@app.route('/index',subdomain='<name>')
+def other_index(name):
+    print("xxx")
+    return 'other_index %s' % name
+
+if __name__ == '__main__':
+    app.run()
+```
+
 @app.router(*args,**kwargs)更多可传参数
 ```
 endpoint=None,              名称，用于反向生成URL，即： url_for('名称')
@@ -264,10 +292,6 @@ subdomain=None,             子域名访问
                                     if __name__ == '__main__':
                                         app.run()
 ```
-
-
-
-
 
 ## flask实现登录
 
