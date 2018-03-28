@@ -122,6 +122,9 @@ def route(self, rule, **options):
     return decorator
 ```
 
+那么flask路由规则就可以改写成app.add_url_rule('/index','n1',index)
+
+
 ## flask实现登录
 
 动手写一个flask实现登录来带入falsk基本知识的学习
