@@ -182,7 +182,11 @@ def route(self, rule, **options):
 那么flask路由规则就可以改写成app.add_url_rule('/index','n1',index)
 
 
-即然app.router(*args,**kwargs) 可以传参，那么都可以传哪些参数呢？
+即然@app.router(*args,**kwargs) 可以传参，那么都可以传哪些参数呢？
+
+可以传url,methods,endpoint,defaults
+
+defaults是url上不必传参，但视图函数需要参数，此时可以用defaults传参
 
 ```
 from flask import Flask
@@ -197,6 +201,50 @@ def index(nid,cid):
 
 if __name__ == '__main__':
     app.run()
+```
+
+@app.router(*args,**kwargs)更多可传参数
+```
+endpoint=None,              名称，用于反向生成URL，即： url_for('名称')
+methods=None,               允许的请求方式，如：["GET","POST"]
+
+
+strict_slashes=None,        对URL最后的 / 符号是否严格要求，
+                            如：
+                                @app.route('/index',strict_slashes=False)，
+                                    访问 http://www.xx.com/index/ 或 http://www.xx.com/index均可
+                                @app.route('/index',strict_slashes=True)
+                                    仅访问 http://www.xx.com/index 
+redirect_to=None,           重定向到指定地址
+                            如：
+                                @app.route('/index/<int:nid>', redirect_to='/home/<nid>')
+                                或
+                                def func(adapter, nid):
+                                    return "/home/888"
+                                @app.route('/index/<int:nid>', redirect_to=func)
+subdomain=None,             子域名访问
+                                    from flask import Flask, views, url_for
+
+                                    app = Flask(import_name=__name__)
+                                    app.config['SERVER_NAME'] = 'wupeiqi.com:5000'
+
+
+                                    @app.route("/", subdomain="admin")
+                                    def static_index():
+                                        """Flask supports static subdomains
+                                        This is available at static.your-domain.tld"""
+                                        return "static.your-domain.tld"
+
+
+                                    @app.route("/dynamic", subdomain="<username>")
+                                    def username_index(username):
+                                        """Dynamic subdomains are also supported
+                                        Try going to user1.your-domain.tld/dynamic"""
+                                        return username + ".your-domain.tld"
+
+
+                                    if __name__ == '__main__':
+                                        app.run()
 ```
 
 
