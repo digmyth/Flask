@@ -1,6 +1,12 @@
 
 # ORM之SQLAlchemy框架
 
+无从致书以观，每假借于藏书之家，手自笔录，计日以还。
+
+[参考1](http://www.cnblogs.com/wupeiqi/articles/8259356.html)
+[参考2](http://www.cnblogs.com/wupeiqi/articles/5713330.html)
+
+
 ### 什么是ORM
 
 ORM（object relation mapping） 对象关系映射关系 ，面向对象的对象模型和关系型数据之间的相互转换。
