@@ -26,7 +26,7 @@ pip3 install sqlalchemy
 * Engine:框架的引擎
 * Connection Pooling:数据库连接池
 * Dialect:选择连接数据库的DB API种类:mysql,sqlite,oracle
-* Schema/Types: 架构和类型
+* Schema/Types: 架构和类型,数据库升降级就是通过schema控制的（db sync）
 * SQL Exprression Language: SQL表达式语言,其实就是将类对象转换为底层sql语句。
 
 SQLAlchemy本身无法操作数据库，其必须以来pymsql等第三方插件，Dialect用于和数据API进行交流，根据配置文件的不同调用不同的数据库API，从而实现对数据库的操作，如：
