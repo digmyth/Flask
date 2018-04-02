@@ -22,7 +22,7 @@ SQLAlchemy是一个基于Python实现的ORM框架。该框架建立在 DB API之
 pip3 install sqlalchemy
 ```
 
-![orm架构](https://images2015.cnblogs.com/blog/425762/201601/425762-20160117042127803-263417768.png)
+
 * Engine:框架的引擎
 * Connection Pooling:数据库连接池
 * Dialect:选择连接数据库的DB API种类:mysql,sqlite,oracle
