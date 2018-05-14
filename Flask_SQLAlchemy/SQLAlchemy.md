@@ -27,7 +27,7 @@ pip3 install sqlalchemy
 * Connection Pooling:数据库连接池,用来管理应用程序到数据库的连接
 * Dialect:用来对接不同的数据库驱动，这些驱动要实现数据库的DB API:mysql,sqlite,oracle
 * Schema/Types: 1.实现了对SQL的DDL(Data Definition Language)的封装，其实就是实现的类对应一张表，对象对应一行数据，SQL Expression Language的操作对象就是这里定义的Table，2.同时也是架构和类型,数据库升降级就是是通过schema控制的（db sync）
-* SQL Exprression Language:SQL表达式语言实现了对数据库的SELECT、DELETE、UPDATE等语句的封装，是实现ORM层的基础。 
+* SQL Expression Language:SQL表达式语言实现了对数据库的SELECT、DELETE、UPDATE等语句的封装，是实现ORM层的基础。 
 
 SQLAlchemy本身无法操作数据库，其必须以来pymsql等第三方插件，Dialect用于和数据API进行交流，根据配置文件的不同调用不同的数据库API，从而实现对数据库的操作，如：
 ```
@@ -45,3 +45,6 @@ cx_Oracle
     
 更多：http://docs.sqlalchemy.org/en/latest/dialects/index.html
 ```
+
+
+
