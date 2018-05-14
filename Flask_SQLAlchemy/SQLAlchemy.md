@@ -8,13 +8,13 @@
 [参考2](http://www.cnblogs.com/wupeiqi/articles/5713330.html)
 
 
-### 什么是ORM
+### 一.什么是ORM
 
 ORM（object relational mapping） 对象关系映射关系 ，面向对象的对象模型和关系型数据之间的相互转换。
 
 大白话就是基于类对象的方式操作数据库，一个类对应一张表，一个类对象对应一行数据。
 
-### SQLAlchemy框架
+### 二.SQLAlchemy框架
 
 SQLAlchemy是一个基于Python实现的ORM框架。该框架建立在 DB API之上，使用关系对象映射进行数据库操作，简言之便是：将类和对象转换成SQL，然后使用数据API执行SQL并获取执行结果。
 
@@ -45,6 +45,11 @@ cx_Oracle
     
 更多：http://docs.sqlalchemy.org/en/latest/dialects/index.html
 ```
+
+三.
+
+
+四.
 
 
 
