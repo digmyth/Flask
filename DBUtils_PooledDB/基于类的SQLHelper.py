@@ -57,7 +57,14 @@ class SQLHelper(object):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-# with SQLHelper() as obj:
-#
-#     print(obj)
-#     print('正在执行')
+# app.py程序中使用        
+from path.to.filexx import SQLHelper
+main = Blueprint('main', __name__)
+
+@main.route('/index')
+def index():
+    with SQLHelper() as helper:
+        user_list = helper.fetchall('select * from users',[])
+
+    return render_template('index.html',user_list=user_list)
+
