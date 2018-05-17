@@ -69,7 +69,7 @@ class Config(dict):
         pass
 ```
 
-## 配置方法一
+## 配置方法一(基于字典)
 
 当作字典存取数据，没什么可讲的
 ```
@@ -80,7 +80,7 @@ app.config['name'] = 'wxq'
 print(app.config['name'])
 ```
 
-## 配置方法二
+## 配置方法二(基于文件)
 
 基于文件settings.py
 ```
@@ -136,7 +136,7 @@ for key in dir(d):
                 self[key] = getattr(obj, key)
 ```
 
-## 配置方法三
+## 配置方法三(基于类)
 
 基于类的封装数据settings.py
 ```
@@ -164,3 +164,63 @@ def from_object(self, obj):
         if key.isupper():
             self[key] = getattr(obj, key) # 根据反射导入的模块取值
 ```
+
+## 配置方法四(基于环境变量)
+
+介绍前先脑补下os.environ知识点
+```
+os.environ.setdefault('a','666')
+print(os.environ.get('a'))
+
+os.environ['b'] = '99'
+print(os.environ.get('b'))
+```
+
+如上代码其实在Django中也有用到wsgi.py
+```
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "pro_crm.settings")
+```
+
+其实就是在程序刚加载时动态内存空间设置了变量"DJANGO_SETTINGS_MODULE" = "pro_crm.settings"
+
+from Django import conf # 进入conf源码里有下面取值，正是os.environ的用法
+```
+ENVIRONMENT_VARIABLE = "DJANGO_SETTINGS_MODULE"
+os.environ.get(ENVIRONMENT_VARIABLE)
+```
+
+那么有了上面的脑补，app.config配置如下
+```
+os.environ.setdefault('k','settings.py')
+
+app.config.from_envvar('k')  
+print(app.config['SECRET_KEY'])
+print(app.config['NAME'])
+```
+
+源码解析
+```
+def from_envvar(self, variable_name, silent=False):
+    rv = os.environ.get(variable_name)  # os.environ.setdefault('k','settings.py') 其实'settings.py'字串还是传给了from_pyfile()   
+    if not rv:
+        if silent:
+            return False
+        raise RuntimeError('The environment variable %r is not set '
+                           'and as such configuration could not be '
+                           'loaded.  Set this variable and make it '
+                           'point to a configuration file' %
+                           variable_name)
+    return self.from_pyfile(rv, silent=silent)
+```
+
+## 总结
+
+本质：app.config=make_config(instance_relative_config)=config_class(root_path, self.default_config)=Config(dict)
+
+方法很多： from_envvar() from_pyfile() from_object()
+
+当跨文件使用时from flask import current_app，利用current_app.config['xx']取值
+
+
+
+
