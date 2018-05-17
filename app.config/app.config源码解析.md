@@ -93,7 +93,25 @@ app.config.from_pyfile('settings.py')
 print(app.config['MM'])   # 取出settings.py里的变量
 ```
 
+看源码之前先来看一段代码片段
+```
+import types
+
+d = types.ModuleType('config') # __name__ = config
+d.__file__ = 'settings.py'     #  __file__ = settings.py
+with open('settings.py','rb') as f:
+    exec(compile(f.read(),'settings.py','exec'),d.__dict__)  #定义的变量读出来放在d.__dict__ = {}字典里
+print(dir(d)) # ['MM', '__builtins__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__']
+
+for key in dir(d):
+    if key.isupper():
+        x=getattr(d,key)
+        print(x)
+```
+
 源码解析
+
+原理就是动态创建了一个模块d,把settings.py里的变量读出来放在d.__dict = {}里，根据dir(d)取出变量
 ```
     def from_pyfile(self, filename, silent=False):
         filename = os.path.join(self.root_path, filename)
@@ -116,40 +134,33 @@ print(app.config['MM'])   # 取出settings.py里的变量
         for key in dir(obj):
             if key.isupper():
                 self[key] = getattr(obj, key)
-
-    def from_json(self, filename, silent=False):
-        filename = os.path.join(self.root_path, filename)
-
-        try:
-            with open(filename) as json_file:
-                obj = json.loads(json_file.read())
-        except IOError as e:
-            if silent and e.errno in (errno.ENOENT, errno.EISDIR):
-                return False
-            e.strerror = 'Unable to load configuration file (%s)' % e.strerror
-            raise
-        return self.from_mapping(obj)
 ```
-
-
-
-
-
-
-
 
 ## 配置方法三
+
+基于类的封装数据settings.py
 ```
-import types
+class Base():
+    SECRET_KEY = 'sdfsdf'
+class Dev(Base):
+    NAME = 'wxq'
+```
 
-d = types.ModuleType('config') # __name__ = config
-d.__file__ = 'settings.py'     #  __file__ = settings.py
-with open('settings.py','rb') as f:
-    exec(compile(f.read(),'settings.py','exec'),d.__dict__)  #定义的变量读出来放在d.__dict__ = {}字典里
-print(dir(d)) # ['MM', '__builtins__', '__doc__', '__file__', '__loader__', '__name__', '__package__', '__spec__']
+传入时是字符串形式'settings.Dev'类
+```
+app.config.from_object('settings.Dev')
+print(app.config['SECRET_KEY'])
+print(app.config['NAME'])
+```
 
-for key in dir(d):
-    if key.isupper():
-        x=getattr(d,key)
-        print(x)
+源码解析
+
+根据传入字符串利用反射导入模块取出类中变量
+```
+def from_object(self, obj):
+    if isinstance(obj, string_types):
+        obj = import_string(obj) # 形如 mod = importlib.import_module(module_path)封装的一个函数，功能类似
+    for key in dir(obj):
+        if key.isupper():
+            self[key] = getattr(obj, key) # 根据反射导入的模块取值
 ```
