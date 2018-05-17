@@ -371,13 +371,15 @@ print(request.method)  # 请求方法
         # return response
 ```
 
-
+```
 s117
 app.secret_key  = 'sss'
 session['user_info'] = user
 
 if session.get('user_info'): pass
+```
 
+```
 s118
 内容：
 1 路由系统
@@ -389,11 +391,15 @@ s118
 7 闪现， 依赖session
 8 扩展或称特殊装饰器，类似中间件的东西
 9 数据库连接池
+```
 
 
 内容回顾：
+
 实例化Falsk对象：__name__ 静态文件路径static_folder='static'，静态文件前缀static_url_path，模板路径template_forder
+
 路由关系： 2种方式，
+```
 request
     request.args
     request.form
@@ -408,7 +414,8 @@ response
     ? cookie/响应关，make_response()来加工对set_cookie的实现
     
     session remember add  app.secrect_key 回顾完
-    
+```
+
 ## 配置文件用法
 
 [app.config源码解析参考](https://github.com/digmyth/Flask/blob/master/app.config/app.config%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
