@@ -217,7 +217,7 @@ def from_envvar(self, variable_name, silent=False):
 
 本质：app.config=make_config(instance_relative_config)=config_class(root_path, self.default_config)=Config(dict)
 
-方法很多： from_envvar() from_pyfile() from_object()
+方法很多(Config里)： from_envvar() from_pyfile() from_object()
 
 当跨文件使用时from flask import current_app，利用current_app.config['xx']取值
 
