@@ -14,5 +14,15 @@ app = Flask(__name__)
 # app.config=make_config(instance_relative_config)=config_class(root_path, self.default_config)=Config(dict)
 ```
 
+Note that: aa['xx'] 一般2种情况：除了是字典外，还可能是如下类，访问类的 __setitem__(self, key, value)方法
+```
+class Foo():
+    def __setitem__(self, key, value):
+        self.key = value
+        print(key,value)
+
+obj = Foo()
+obj['xx'] = 123
+```
 
 
