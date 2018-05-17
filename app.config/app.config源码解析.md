@@ -93,7 +93,7 @@ app.config.from_pyfile('settings.py')
 print(app.config['MM'])   # 取出settings.py里的变量
 ```
 
-源码
+源码解析
 ```
     def from_pyfile(self, filename, silent=False):
         filename = os.path.join(self.root_path, filename)
