@@ -2,7 +2,7 @@
 
 时间过得真快，一天天的，其实今天一整天也没有做什么，不知不觉又是晚上，那就闲来写写吧.
 
-在Flask里最常用变量就secret_key = 'sfadf',这个变量可以直接写在主程序里，但更多的是写在app.config['xxx'] = 'yyy'
+在Flask里最常用变量就secret_key = 'sfadf',这个变量可以直接形如Key,value写在主程序里，但更多的是app.config['xxx'] = 'yyy'形式封装在app.config里.
 
 变量一多不免繁锁，那么app.config到底是个什么呢？还有哪些更程序化的配置方法呢？
 
