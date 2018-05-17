@@ -418,6 +418,6 @@ response
 
 ## 配置文件用法
 
-[app.config源码解析参考](https://github.com/digmyth/Flask/blob/master/app.config/app.config%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90)
+[app.config源码解析参考](https://github.com/digmyth/Flask/blob/master/app.config/app.config%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md)
 
-https://github.com/digmyth/Flask/blob/master/app.config/app.config%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md
+
