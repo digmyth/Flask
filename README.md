@@ -416,6 +416,11 @@ response
     session remember add  app.secrect_key 回顾完
 ```
 
+静态文件配置url_for
+```
+<link rel="stylesheet" href="{{ url_for('static',filename='plugins/bootstrap-3.3.7-dist/css/bootstrap.css') }}">
+```
+
 ## 配置文件用法
 
 [app.config源码解析参考](https://github.com/digmyth/Flask/blob/master/app.config/app.config%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90.md)
