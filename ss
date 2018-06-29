@@ -65,3 +65,9 @@ def project_add():
     form = MyForm()
     return render_template('project_add.html',form=form)
 ```
+
+form = MyForm(data={'xx':'123',formdata=request.form})  
+
+* data表示传入默认数据
+* formdata表示要对此数据进行校验
+
