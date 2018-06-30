@@ -68,6 +68,6 @@ def project_add():
 
 form = MyForm(data={'xx':'123',formdata=request.form})  
 
-* data表示传入默认数据
-* formdata表示要对此数据进行校验
+* data用于编辑数据时传入默认数据
+* formdata用于提交数据时对此数据进行校验
 
